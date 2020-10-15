@@ -12,8 +12,8 @@ class Directors extends React.Component {
   state = {
     open: false,
     name: '',
-    age: 0,
-  }
+    year: 0,
+  };
 
   handleClickOpen = (data) => {
     this.setState({
@@ -22,26 +22,43 @@ class Directors extends React.Component {
     });
   };
 
-  handleClose = () => { this.setState({ name: '', age: 0, id: null, open: false }); };
+  handleClose = () => {
+    this.setState({ name: '', year: 0, id: null, open: false });
+  };
 
-  handleChange = name => ({ target }) => { this.setState({ [name]: target.value }); };
+  handleChange = (name) => ({ target }) => {
+    this.setState({ [name]: target.value });
+  };
 
   render() {
-    const { name, age, id, open } = this.state;
+    const { name, year, id, open } = this.state;
     const { classes } = this.props;
 
     return (
       <>
-        <DirectorsForm handleChange={this.handleChange} selectedValue={{ name, age, id }} open={open} onClose={this.handleClose} />
+        <DirectorsForm
+          handleChange={this.handleChange}
+          selectedValue={{ name, year, id }}
+          open={open}
+          onClose={this.handleClose}
+        />
         <div className={classes.wrapper}>
-          <DirectorsTable onOpen={this.handleClickOpen} onClose={this.handleClose} />
-          <Fab onClick={() => this.handleClickOpen(null)} color="primary" aria-label="Add" className={classes.fab}>
+          <DirectorsTable
+            onOpen={this.handleClickOpen}
+            onClose={this.handleClose}
+          />
+          <Fab
+            onClick={() => this.handleClickOpen(null)}
+            color='primary'
+            aria-label='Add'
+            className={classes.fab}
+          >
             <AddIcon />
           </Fab>
         </div>
       </>
     );
   }
-};
+}
 
 export default withHocs(Directors);
